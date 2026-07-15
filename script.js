@@ -1,10 +1,10 @@
 (function () {
 
   var routes = {
-    home:    'https://alexmorgan.design/portfolio',
-    about:   'https://alexmorgan.design/portfolio/about',
-    work:    'https://alexmorgan.design/portfolio/work',
-    contact: 'https://alexmorgan.design/portfolio/contact'
+    home:    'https://nanDooEruu.design/portfolio',
+    about:   'https://nanDooEruu.design/portfolio/about',
+    work:    'https://nanDooEruu.design/portfolio/work',
+    contact: 'https://nanDooEruu.design/portfolio/contact'
   };
 
   var tabBar      = document.querySelector('.tab-bar');
