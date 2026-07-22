@@ -179,7 +179,7 @@
     tab.dataset.tabId = tabIdCounter;
     tab.innerHTML =
       '<div class="tab-favicon"></div>' +
-      '<span class="tab-title">Alex Morgan — Portfolio</span>' +
+      '<span class="tab-title">nanDooEruu — Portfolio</span>' +
       '<span class="tab-close">&times;</span>';
 
     tabBar.insertBefore(tab, newTabBtn);
