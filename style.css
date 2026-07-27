@@ -503,7 +503,7 @@ body {
 /* ── Work ─────────────────────────────────── */
 
 .work-content {
-  max-width: 640px;
+  max-width: 1000px;
 }
 
 .work-content h2 {
@@ -523,36 +523,67 @@ body {
 .work-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 24px;
   margin-top: 32px;
 }
 
 .work-card {
-  height: 190px;
+  height: 220px;
   background: #e5e5e5;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 12px;
   font-size: 0.65rem;
   letter-spacing: 2px;
   color: #999;
   text-transform: uppercase;
-  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 12px;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s ease;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .work-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
 }
 
 a.work-card {
   text-decoration: none;
-  color: #1e3a5f;
+  color: #e0e7ff;
   font-size: 0.85rem;
   font-weight: 600;
-  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-  border: 1px solid #93c5fd;
+  background: linear-gradient(135deg, #3b5998 0%, #4f46e5 50%, #7c3aed 100%);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.15);
+}
+
+a.work-card:hover {
+  box-shadow: 0 12px 36px rgba(79, 70, 229, 0.3);
+}
+
+.card-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.card-badge {
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  margin-top: 4px;
 }
 
 /* ── Contact ──────────────────────────────── */
@@ -732,5 +763,9 @@ a.work-card {
 
   .work-grid {
     grid-template-columns: 1fr;
+  }
+
+  .work-card {
+    height: 180px;
   }
 }
