@@ -15,6 +15,12 @@
   var MAX_TABS    = 5;
   var tabIdCounter = 1;
 
+  // ── Rotating Text config ───────────────────
+
+  var rotatingWords = ['trainer', 'student', 'tomic'];
+  var SWAP_MS = 3500;
+  var ANIM_MS = 500;
+
   // ── Helpers ────────────────────────────────
 
   function showToast(msg) {
@@ -25,7 +31,6 @@
     }, 2500);
   }
 
-  // Show a section inside a specific viewport
   function showSectionInViewport(viewport, sectionName) {
     var secs = viewport.querySelectorAll('.section');
     var navLinks = viewport.querySelectorAll('.nav-list a');
@@ -37,7 +42,36 @@
     if (target) {
       target.classList.add('active');
       viewport.querySelector('.main-content').scrollTop = 0;
+
+      // Staggered entry animation for skill cards
+      if (sectionName === 'about') {
+        var skillCards = target.querySelectorAll('.skill-card');
+        skillCards.forEach(function (card, i) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(function () {
+            card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 100 + i * 80);
+        });
+      }
+
+      // Staggered entry animation for work cards
+      if (sectionName === 'work') {
+        var workCards = target.querySelectorAll('.work-card');
+        workCards.forEach(function (card, i) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(24px) scale(0.96)';
+          setTimeout(function () {
+            card.style.transition = 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0) scale(1)';
+          }, 120 + i * 100);
+        });
+      }
     }
+
     navLinks.forEach(function (l) {
       if (l.getAttribute('data-section') === sectionName) {
         l.classList.add('active');
@@ -50,7 +84,6 @@
     }
   }
 
-  // Bind nav clicks inside a viewport
   function bindViewportNav(viewport) {
     var navLinks = viewport.querySelectorAll('.nav-list a');
     navLinks.forEach(function (link) {
@@ -60,7 +93,7 @@
       });
     });
 
-    var portfolioBtn = viewport.querySelector('.btn-outline');
+    var portfolioBtn = viewport.querySelector('.btn-primary');
     if (portfolioBtn) {
       portfolioBtn.addEventListener('click', function (e) {
         e.preventDefault();
@@ -69,7 +102,6 @@
     }
   }
 
-  // Bind form submit inside a viewport
   function bindViewportForm(viewport) {
     var form = viewport.querySelector('.contact-form');
     var success = viewport.querySelector('.form-success');
@@ -78,7 +110,7 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = form.querySelector('.btn-submit');
-      btn.textContent = 'Sending...';
+      btn.innerHTML = '<span>Sending...</span>';
       btn.disabled = true;
 
       fetch(form.action, {
@@ -99,7 +131,7 @@
         alert('Something went wrong. Please try again later.');
       })
       .finally(function () {
-        btn.textContent = 'Submit';
+        btn.innerHTML = '<span>Send Message</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
         btn.disabled = false;
       });
     });
@@ -142,27 +174,23 @@
 
     tabIdCounter++;
 
-    // Clone the first viewport as template
     var template = container.querySelector('.browser-viewport');
     var clone = template.cloneNode(true);
     clone.dataset.tabId = tabIdCounter;
     clone.classList.add('active');
 
-    // Reset clone to home section
     var secs = clone.querySelectorAll('.section');
     secs.forEach(function (s) { s.classList.remove('active'); });
     var homeSec = clone.querySelector('#home');
     if (homeSec) homeSec.classList.add('active');
     clone.dataset.activeSection = 'home';
 
-    // Reset nav active state
     var navLinks = clone.querySelectorAll('.nav-list a');
     navLinks.forEach(function (l) {
       l.classList.remove('active');
       if (l.getAttribute('data-section') === 'home') l.classList.add('active');
     });
 
-    // Reset form if present
     var form = clone.querySelector('.contact-form');
     var success = clone.querySelector('.form-success');
     if (form) {
@@ -171,9 +199,14 @@
     }
     if (success) success.classList.remove('visible');
 
+    // Reset transient classes on cloned rotating text
+    var cloneRotating = clone.querySelector('.rotating-text');
+    if (cloneRotating) {
+      cloneRotating.classList.remove('anim-out', 'anim-in');
+    }
+
     container.appendChild(clone);
 
-    // Create tab button
     var tab = document.createElement('div');
     tab.className = 'tab';
     tab.dataset.tabId = tabIdCounter;
@@ -184,7 +217,6 @@
 
     tabBar.insertBefore(tab, newTabBtn);
 
-    // Switch to new tab
     var prevActive = getActiveTab();
     if (prevActive) prevActive.classList.remove('active');
     var prevVP = getActiveViewport();
@@ -195,16 +227,16 @@
 
     if (addressInput) addressInput.value = routes.home;
 
-    // Bind events on cloned viewport
     bindViewportNav(clone);
     bindViewportForm(clone);
+    bindRotatingText(clone.querySelector('.rotating-text'));
+    bindParallax(clone);
+    bindTilt(clone);
 
-    // Tab click
     tab.querySelector('.tab-title').addEventListener('click', function () {
       activateTab(tab);
     });
 
-    // Close click
     tab.querySelector('.tab-close').addEventListener('click', function (e) {
       e.stopPropagation();
       closeTab(tab);
@@ -221,26 +253,27 @@
     var wasActive = tab.classList.contains('active');
     var tabId = tab.dataset.tabId;
 
-    // Determine next tab to activate
     var next = tab.nextElementSibling;
     if (!next || next.classList.contains('new-tab-btn')) {
       next = tab.previousElementSibling;
     }
 
-    // Remove viewport
     var vp = container.querySelector('[data-tab-id="' + tabId + '"]');
-    if (vp) vp.remove();
-
-    // Remove tab
+    if (vp) {
+      var vpRotating = vp.querySelector('.rotating-text');
+      if (vpRotating && vpRotating._rotatingInterval) {
+        clearInterval(vpRotating._rotatingInterval);
+      }
+      vp.remove();
+    }
     tab.remove();
 
-    // Activate next if needed
     if (wasActive && next && next.classList.contains('tab')) {
       activateTab(next);
     }
   }
 
-  // ── Init first tab ─────────────────────────
+  // ── Init ───────────────────────────────────
 
   var firstViewport = container.querySelector('.browser-viewport');
   if (firstViewport) {
@@ -249,6 +282,14 @@
     firstViewport.classList.add('active');
     bindViewportNav(firstViewport);
     bindViewportForm(firstViewport);
+    bindRotatingText(firstViewport.querySelector('.rotating-text'));
+    bindParallax(firstViewport);
+    bindTilt(firstViewport);
+
+    // Trigger staggered animation on first load
+    setTimeout(function () {
+      showSectionInViewport(firstViewport, 'home');
+    }, 300);
   }
 
   var firstTab = tabBar.querySelector('.tab');
@@ -267,7 +308,48 @@
     newTabBtn.addEventListener('click', createTab);
   }
 
-  // ── Bookmark heart toggle ──────────────────
+  // ── Cursor-Following Dot Glow ──────────────
+
+  var dotCursor = document.querySelector('.bg-dot-cursor');
+
+  if (dotCursor) {
+    document.addEventListener('mousemove', function (e) {
+      dotCursor.style.setProperty('--mx', e.clientX + 'px');
+      dotCursor.style.setProperty('--my', e.clientY + 'px');
+    });
+  }
+
+  // ── Rotating Text (Home Headline) ─────────
+
+  function bindRotatingText(el) {
+    if (!el || el._rotatingBound) return;
+    el._rotatingBound = true;
+
+    var wordIndex = 0;
+
+    el._rotatingInterval = setInterval(function () {
+      if (!document.body.contains(el)) {
+        clearInterval(el._rotatingInterval);
+        return;
+      }
+
+      wordIndex = (wordIndex + 1) % rotatingWords.length;
+      el.classList.add('anim-out');
+
+      setTimeout(function () {
+        if (!document.body.contains(el)) return;
+        el.textContent = rotatingWords[wordIndex];
+        el.classList.remove('anim-out');
+        void el.offsetWidth;
+        el.classList.add('anim-in');
+        setTimeout(function () {
+          el.classList.remove('anim-in');
+        }, ANIM_MS);
+      }, ANIM_MS);
+    }, SWAP_MS);
+  }
+
+  // ── Bookmark Heart ─────────────────────────
 
   var bookmarkHeart = document.getElementById('bookmarkHeart');
   if (bookmarkHeart) {
@@ -277,6 +359,53 @@
       bookmarkHeart.classList.remove('pop');
       void bookmarkHeart.offsetWidth;
       bookmarkHeart.classList.add('pop');
+    });
+  }
+
+  // ── Parallax Mouse on Hero ─────────────────
+
+  function bindParallax(viewport) {
+    var heroImage = viewport.querySelector('.hero-image');
+    var heroGlow = viewport.querySelector('.hero-glow');
+    var mc = viewport.querySelector('.main-content');
+    if (!mc || !heroImage) return;
+
+    mc.addEventListener('mousemove', function (e) {
+      var rect = mc.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width - 0.5;
+      var y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      heroImage.style.transform = 'translate(' + (x * 12) + 'px, ' + (y * 12) + 'px)';
+      if (heroGlow) {
+        heroGlow.style.transform = 'translate(' + (x * -20) + 'px, ' + (y * -20) + 'px)';
+      }
+    });
+
+    mc.addEventListener('mouseleave', function () {
+      heroImage.style.transform = 'translate(0, 0)';
+      if (heroGlow) {
+        heroGlow.style.transform = 'translate(0, 0)';
+      }
+    });
+  }
+
+  // ── 3D Tilt on Work Cards ───────────────────
+
+  function bindTilt(viewport) {
+    var cards = viewport.querySelectorAll('.work-card:not(.card-delta)');
+
+    cards.forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform =
+          'translateY(-6px) perspective(700px) rotateX(' + (-y * 8).toFixed(2) + 'deg) rotateY(' + (x * 8).toFixed(2) + 'deg)';
+      });
+
+      card.addEventListener('mouseleave', function () {
+        card.style.transform = '';
+      });
     });
   }
 
