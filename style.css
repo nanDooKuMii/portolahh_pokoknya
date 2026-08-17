@@ -1112,6 +1112,15 @@ body {
   border-color: rgba(124,58,237,0.3);
 }
 
+.card-keamanan::before {
+  background:
+    linear-gradient(180deg, transparent 25%, rgba(0,0,0,0.8) 100%),
+    url('7-KeamananJaringan.png') center top/cover no-repeat;
+  filter: blur(3px);
+  transform: scale(1.06);
+  transform-origin: center top;
+}
+
 .card-keamanan:hover {
   box-shadow: 0 24px 55px rgba(124,58,237,0.45);
   border-color: rgba(167,139,250,0.6);
@@ -1122,6 +1131,15 @@ body {
   border-color: rgba(20,184,166,0.3);
 }
 
+.card-asj::before {
+  background:
+    linear-gradient(180deg, transparent 25%, rgba(0,0,0,0.8) 100%),
+    url('6-ASJ.png') center top/cover no-repeat;
+  filter: blur(3px);
+  transform: scale(1.06);
+  transform-origin: center top;
+}
+
 .card-asj:hover {
   box-shadow: 0 24px 55px rgba(20,184,166,0.45);
   border-color: rgba(45,212,191,0.6);
@@ -1130,6 +1148,15 @@ body {
 .card-english {
   background: linear-gradient(135deg, #92400e 0%, #d97706 50%, #f59e0b 100%);
   border-color: rgba(245,158,11,0.3);
+}
+
+.card-english::before {
+  background:
+    linear-gradient(180deg, transparent 25%, rgba(0,0,0,0.8) 100%),
+    url('8-English.png') center top/cover no-repeat;
+  filter: blur(3px);
+  transform: scale(1.06);
+  transform-origin: center top;
 }
 
 .card-english:hover {
