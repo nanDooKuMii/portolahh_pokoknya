@@ -14,6 +14,11 @@
   <!-- Background Layers -->
   <div class="bg-image" aria-hidden="true"></div>
   <div class="bg-dot-cursor" aria-hidden="true"></div>
+  <div class="water-surface" aria-hidden="true">
+    <div class="water-ripple"></div>
+    <div class="water-ripple water-ripple-2"></div>
+    <div class="water-ripple water-ripple-3"></div>
+  </div>
 
   <!-- Animated Background Orbs -->
   <div class="bg-orbs">
@@ -92,6 +97,7 @@
 
           <!-- Home -->
           <section id="home" class="section active">
+            <div class="section-divider" aria-hidden="true"></div>
             <div class="home-grid">
               <div class="home-text">
                 <div class="greeting-badge">
@@ -136,6 +142,7 @@
 
           <!-- About -->
           <section id="about" class="section">
+            <div class="section-divider" aria-hidden="true"></div>
             <div class="about-content">
               <div class="section-badge">02</div>
               <h2>About <span class="gradient-text">Me</span></h2>
@@ -177,54 +184,119 @@
 
           <!-- Work -->
           <section id="work" class="section">
+            <div class="section-divider" aria-hidden="true"></div>
             <div class="work-content">
               <div class="section-badge">03</div>
               <h2>Selected <span class="gradient-text">Work</span></h2>
               <p>
                 Disini adalah projek-projek yang telah saya kerjakan dan sudah saya up ke sini. Tugas dari berbagai hal yang ingin dan harus dikumpulkan pada porto ini.
               </p>
-              <div class="work-grid">
-                <a class="work-card card-topologi" href="https://drive.google.com/drive/folders/1pO6M1Cm60JUcqIKxC30n_86B9cyox1UJ?usp=drive_link" target="_blank" rel="noopener noreferrer">
-                  <div class="card-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M12 8v4m0 0l-5 5m5-5l5 5"/></svg>
+              <div class="card-fan">
+                <div class="card-slot" data-card="topologi">
+                  <div class="p3r-card">
+                    <div class="card-face card-face-front card-topologi">
+                      <div class="card-face-img" style="background-image:url('3-TopologiNdo.png')"></div>
+                      <div class="card-face-content">
+                        <span class="card-label">Topologi nDoo</span>
+                        <span class="card-badge">G-Drive</span>
+                      </div>
+                    </div>
+                    <div class="card-face card-face-back card-topologi">
+                      <div class="card-back-inner">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M12 8v4m0 0l-5 5m5-5l5 5"/></svg>
+                        <span>Open Project</span>
+                      </div>
+                    </div>
+                    <a class="card-link" href="https://drive.google.com/drive/folders/1pO6M1Cm60JUcqIKxC30n_86B9cyox1UJ?usp=drive_link" target="_blank" rel="noopener noreferrer" tabindex="-1"></a>
                   </div>
-                  <span class="card-label">Topologi nDoo</span>
-                  <span class="card-badge">G-Drive</span>
-                </a>
-                <a class="work-card card-osint" href="https://youtu.be/t6XycUnVeQQ" target="_blank" rel="noopener noreferrer">
-                  <div class="card-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                </div>
+
+                <div class="card-slot" data-card="osint">
+                  <div class="p3r-card">
+                    <div class="card-face card-face-front card-osint">
+                      <div class="card-face-img" style="background-image:url('4-OsintThumb.png')"></div>
+                      <div class="card-face-content">
+                        <span class="card-label">Vid OSINT KJ</span>
+                        <span class="card-badge">YouTube</span>
+                      </div>
+                    </div>
+                    <div class="card-face card-face-back card-osint">
+                      <div class="card-back-inner">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                        <span>Watch Video</span>
+                      </div>
+                    </div>
+                    <a class="card-link" href="https://youtu.be/t6XycUnVeQQ" target="_blank" rel="noopener noreferrer" tabindex="-1"></a>
                   </div>
-                  <span class="card-label">Vid OSINT KJ</span>
-                  <span class="card-badge">YouTube</span>
-                </a>
-                <a class="work-card card-asj" href="https://drive.google.com/drive/folders/1W0yZPn7gLFBInDViDBqvslr7eNOhIiJb?usp=drive_link" target="_blank" rel="noopener noreferrer">
-                  <div class="card-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+                </div>
+
+                <div class="card-slot" data-card="asj">
+                  <div class="p3r-card">
+                    <div class="card-face card-face-front card-asj">
+                      <div class="card-face-img" style="background-image:url('6-ASJ.png')"></div>
+                      <div class="card-face-content">
+                        <span class="card-label">ASJ</span>
+                        <span class="card-badge">G-Drive</span>
+                      </div>
+                    </div>
+                    <div class="card-face card-face-back card-asj">
+                      <div class="card-back-inner">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+                        <span>Open Project</span>
+                      </div>
+                    </div>
+                    <a class="card-link" href="https://drive.google.com/drive/folders/1W0yZPn7gLFBInDViDBqvslr7eNOhIiJb?usp=drive_link" target="_blank" rel="noopener noreferrer" tabindex="-1"></a>
                   </div>
-                  <span class="card-label">ASJ</span>
-                  <span class="card-badge">G-Drive</span>
-                </a>
-                <a class="work-card card-keamanan" href="https://drive.google.com/drive/folders/1W5nDmqe2xUR5LwyLegYucWBUl71Ur5H3?usp=drive_link" target="_blank" rel="noopener noreferrer">
-                  <div class="card-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+
+                <div class="card-slot" data-card="keamanan">
+                  <div class="p3r-card">
+                    <div class="card-face card-face-front card-keamanan">
+                      <div class="card-face-img" style="background-image:url('7-KeamananJaringan.png')"></div>
+                      <div class="card-face-content">
+                        <span class="card-label">Keamanan Jaringan</span>
+                        <span class="card-badge">G-Drive</span>
+                      </div>
+                    </div>
+                    <div class="card-face card-face-back card-keamanan">
+                      <div class="card-back-inner">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span>Open Project</span>
+                      </div>
+                    </div>
+                    <a class="card-link" href="https://drive.google.com/drive/folders/1W5nDmqe2xUR5LwyLegYucWBUl71Ur5H3?usp=drive_link" target="_blank" rel="noopener noreferrer" tabindex="-1"></a>
                   </div>
-                  <span class="card-label">Keamanan Jaringan</span>
-                  <span class="card-badge">G-Drive</span>
-                </a>
-                <a class="work-card card-english" href="https://drive.google.com/drive/folders/1QbwpVM1yKhCOePWFyEGnH95CXfuyg0Ll?usp=drive_link" target="_blank" rel="noopener noreferrer">
-                  <div class="card-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                </div>
+
+                <div class="card-slot" data-card="english">
+                  <div class="p3r-card">
+                    <div class="card-face card-face-front card-english">
+                      <div class="card-face-img" style="background-image:url('8-English.png')"></div>
+                      <div class="card-face-content">
+                        <span class="card-label">English</span>
+                        <span class="card-badge">G-Drive</span>
+                      </div>
+                    </div>
+                    <div class="card-face card-face-back card-english">
+                      <div class="card-back-inner">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                        <span>Open Project</span>
+                      </div>
+                    </div>
+                    <a class="card-link" href="https://drive.google.com/drive/folders/1QbwpVM1yKhCOePWFyEGnH95CXfuyg0Ll?usp=drive_link" target="_blank" rel="noopener noreferrer" tabindex="-1"></a>
                   </div>
-                  <span class="card-label">English</span>
-                  <span class="card-badge">G-Drive</span>
-                </a>
-                <div class="work-card card-delta">
-                  <div class="card-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>
+                </div>
+
+                <div class="card-slot" data-card="delta">
+                  <div class="p3r-card card-delta">
+                    <div class="card-face card-face-front">
+                      <div class="card-face-content">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.3"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>
+                        <span class="card-label" style="opacity:0.4">Coming Soon</span>
+                        <span class="card-badge">Soon</span>
+                      </div>
+                    </div>
                   </div>
-                  <span class="card-label">Coming Soon</span>
-                  <span class="card-badge">Soon</span>
                 </div>
               </div>
             </div>
@@ -232,6 +304,7 @@
 
           <!-- Contact -->
           <section id="contact" class="section">
+            <div class="section-divider" aria-hidden="true"></div>
             <div class="contact-content">
               <div class="section-badge">04</div>
               <h2>Connect with <span class="gradient-text">Me</span></h2>
@@ -266,6 +339,7 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="script.js"></script>
 
   <div class="tab-toast" id="tabToast">Maximum 5 tabs allowed</div>
