@@ -54,6 +54,7 @@
 
       if (sectionName === 'work' && typeof gsap !== 'undefined') {
         bindCardFan(viewport);
+        bindVideoSection(viewport);
       }
     }
 
@@ -690,6 +691,40 @@
       onComplete: function () {
         startFloating();
       }
+    });
+  }
+
+  // ── Video Section ──────────────────────────
+
+  function bindVideoSection(viewport) {
+    var section = viewport.querySelector('.video-section');
+    if (!section || section._bound) return;
+    section._bound = true;
+
+    var cards = section.querySelectorAll('.video-card:not(.video-card-soon)');
+    cards.forEach(function (card) {
+      var dx = -12 + Math.random() * 24;
+      var dy = -8 + Math.random() * 16;
+      var ry = -3 + Math.random() * 6;
+      var dur = 3.5 + Math.random() * 3;
+
+      gsap.to(card, {
+        x: '+=' + dx,
+        y: '+=' + dy,
+        rotateY: '+=' + ry,
+        duration: dur,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true
+      });
+    });
+
+    gsap.from(section.querySelectorAll('.video-card'), {
+      opacity: 0,
+      y: 30,
+      stagger: 0.12,
+      duration: 0.6,
+      ease: 'back.out(1.3)'
     });
   }
 
