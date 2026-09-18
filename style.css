@@ -1153,6 +1153,13 @@ body {
   background: linear-gradient(135deg, #92400e, #d97706);
 }
 
+.card-japan .card-face {
+  border-color: rgba(220,38,38,0.4);
+}
+.card-japan .card-face-back {
+  background: linear-gradient(135deg, #7f1d1d, #dc2626);
+}
+
 /* Delta (Coming Soon) */
 
 .card-delta {
