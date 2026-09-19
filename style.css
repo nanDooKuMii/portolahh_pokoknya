@@ -1160,6 +1160,13 @@ body {
   background: linear-gradient(135deg, #7f1d1d, #dc2626);
 }
 
+.card-jawa .card-face {
+  border-color: rgba(180,83,9,0.4);
+}
+.card-jawa .card-face-back {
+  background: linear-gradient(135deg, #78350f, #92400e);
+}
+
 /* Delta (Coming Soon) */
 
 .card-delta {
