@@ -1167,6 +1167,13 @@ body {
   background: linear-gradient(135deg, #78350f, #92400e);
 }
 
+.card-tjkn .card-face {
+  border-color: rgba(147,51,234,0.4);
+}
+.card-tjkn .card-face-back {
+  background: linear-gradient(135deg, #4c1d95, #9333ea);
+}
+
 /* Delta (Coming Soon) */
 
 .card-delta {
